@@ -22,7 +22,7 @@ class LectorArchivoTest {
 		Files.write(archivoTemporal, List.of("10 5", "1 2", "2 3", "3 4"));
 
 		// Ejecutar lectura
-		List<String> lineas = LectorArchivo.leerArchivo(archivoTemporal.toString());
+		List<String> lineas = LectorArchivo.leer(archivoTemporal.toString());
 
 		// Validar resultado
 		assertEquals(4, lineas.size(), "Debe tener 4 líneas (1 cabecera + 3 aristas)");
@@ -36,7 +36,7 @@ class LectorArchivoTest {
 	@DisplayName("Debe lanzar excepción si el archivo no existe")
 	void testArchivoInexistente() {
 		assertThrows(IllegalArgumentException.class, () -> {
-			LectorArchivo.leerArchivo("ruta/que/no/existe.txt");
+			LectorArchivo.leer("ruta/que/no/existe.txt");
 		});
 	}
 
@@ -47,7 +47,7 @@ class LectorArchivoTest {
 		Path archivoTemporal = Files.createTempFile("vacio", ".in");
 
 		Exception ex = assertThrows(IOException.class, () -> {
-			LectorArchivo.leerArchivo(archivoTemporal.toString());
+			LectorArchivo.leer(archivoTemporal.toString());
 		});
 
 		assertTrue(ex.getMessage().contains(MensajeError.ARCHIVO_VACIO));
@@ -62,7 +62,7 @@ class LectorArchivoTest {
 		Path archivoTemporal = Files.createTempFile("blanco", ".in");
 		Files.write(archivoTemporal, List.of("10 5", "  ", "1 2", "", "3 4   "));
 
-		List<String> lineas = LectorArchivo.leerArchivo(archivoTemporal.toString());
+		List<String> lineas = LectorArchivo.leer(archivoTemporal.toString());
 
 		assertEquals(3, lineas.size(), "Debe ignorar líneas vacías");
 		assertFalse(lineas.contains(""));
@@ -77,7 +77,7 @@ class LectorArchivoTest {
 		Path archivoTemporal = Files.createTempFile("mixto", ".in");
 		Files.write(archivoTemporal, List.of("1 2", "   ", "3 4"));
 
-		List<String> lineas = LectorArchivo.leerArchivo(archivoTemporal.toString());
+		List<String> lineas = LectorArchivo.leer(archivoTemporal.toString());
 
 		assertEquals(2, lineas.size(), "Debe ignorar las vacías y conservar las válidas");
 		assertEquals("1 2", lineas.get(0));
@@ -85,10 +85,10 @@ class LectorArchivoTest {
 
 		Files.deleteIfExists(archivoTemporal);
 	}
-	
+
 	@Test
 	@DisplayName("Debe poder instanciar LectorArchivo (para cobertura completa)")
 	void testInstanciacion() {
-	    new LectorArchivo(); // cubrir constructor implícito
+		new LectorArchivo(); // cubrir constructor implícito
 	}
 }

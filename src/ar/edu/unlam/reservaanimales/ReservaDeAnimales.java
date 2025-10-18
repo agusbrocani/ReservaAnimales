@@ -4,32 +4,36 @@ import java.io.IOException;
 import java.util.List;
 
 import ar.edu.unlam.reservaanimales.io.LectorArchivo;
+import ar.edu.unlam.reservaanimales.io.EscritorArchivo;
 
 public class ReservaDeAnimales {
 
 	public static void main(String[] args) {
-		// Eclipse ejecuta el programa con el directorio de trabajo en la raíz del
-		// proyecto.
-		// Por eso "./" hace referencia a la carpeta ReservaAnimales (no a src/ ni a
-		// bin/).
-		
-		String rutaArchivo = "./io/reserva.in";
-//    	String rutaArchivo = "src/test/resources/reserva.txt";
+		String rutaArchivoEntrada = "./io/reserva.in";
+		String rutaArchivoSalida = "./io/reserva.out";
 
 		try {
-			List<String> lineas = LectorArchivo.leerArchivo(rutaArchivo);
+			// Leer archivo original
+			List<String> lineas = LectorArchivo.leer(rutaArchivoEntrada);
 
 			System.out.println("Archivo leído correctamente.\n");
-			System.out.println("Contenido del archivo:");
+			System.out.println("Contenido original:");
 			lineas.forEach(System.out::println);
 
-		} catch (IllegalArgumentException e) {
-			// Errores de validación de ruta (nula, inexistente, etc.)
-			System.err.println("Error de validación: " + e.getMessage());
+			// Agregar nuevos registros
+			lineas.add("10 10");
+			lineas.add("11 12");
+			lineas.add("13 14");
 
+			// Escribir archivo actualizado
+			EscritorArchivo.escribir(rutaArchivoSalida, lineas);
+
+			System.out.println("\nNuevos registros agregados y archivo actualizado.");
+
+		} catch (IllegalArgumentException e) {
+			System.err.println("Error de validación: " + e.getMessage());
 		} catch (IOException e) {
-			// Errores al leer el archivo (problemas de permisos, E/S, etc.)
-			System.err.println("Error de lectura: " + e.getMessage());
+			System.err.println("Error de lectura/escritura: " + e.getMessage());
 		}
 	}
 }

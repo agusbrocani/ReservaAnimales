@@ -19,7 +19,7 @@ public class LectorArchivo {
 	 * @throws IOException              Si hay error de lectura
 	 * @throws IllegalArgumentException Si la ruta es inválida
 	 */
-	public static List<String> leerArchivo(String rutaArchivo) throws IOException {
+	public static List<String> leer(String rutaArchivo) throws IOException {
 		// Validar y construir ruta absoluta
 		String rutaAbsoluta = PathUtils.construirRutaAbsoluta(rutaArchivo);
 
