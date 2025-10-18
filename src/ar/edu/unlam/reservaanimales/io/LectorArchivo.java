@@ -10,7 +10,6 @@ import ar.edu.unlam.reservaanimales.constante.MensajeError;
 import ar.edu.unlam.reservaanimales.util.PathUtils;
 
 public class LectorArchivo {
-
 	/**
 	 * Lee todas las líneas de un archivo de texto. Valida y normaliza la ruta antes
 	 * de abrirlo.
@@ -29,17 +28,20 @@ public class LectorArchivo {
 		// Intentar leer el archivo
 		try (BufferedReader lector = new BufferedReader(new FileReader(rutaAbsoluta))) {
 			String linea;
+			boolean tieneContenido = false;
+
 			while ((linea = lector.readLine()) != null) {
 				String lineaLimpia = linea.trim();
-				if (!lineaLimpia.isEmpty()) { // evita líneas vacías
+				if (!lineaLimpia.isEmpty()) {
+					tieneContenido = true;
 					lineas.add(lineaLimpia);
 				}
 			}
-		}
 
-		// Controlar archivo vacío
-		if (lineas.isEmpty()) {
-			throw new IOException(MensajeError.ARCHIVO_VACIO);
+			// Si no se encontró ninguna línea con contenido
+			if (!tieneContenido) {
+				throw new IOException(MensajeError.ARCHIVO_VACIO);
+			}
 		}
 
 		return lineas;

@@ -13,8 +13,8 @@ public class ReservaDeAnimales {
 		// Por eso "./" hace referencia a la carpeta ReservaAnimales (no a src/ ni a
 		// bin/).
 		
-		String rutaArchivo = "./io/entrada.in";
-//    	String rutaArchivo = "src/test/resources/entrada.txt";
+		String rutaArchivo = "./io/reserva.in";
+//    	String rutaArchivo = "src/test/resources/reserva.txt";
 
 		try {
 			List<String> lineas = LectorArchivo.leerArchivo(rutaArchivo);
