@@ -7,20 +7,15 @@ import ar.edu.unlam.reservaanimales.constante.MensajeError;
 public class ContarCaminosDAG {
 
 	private static final int MOD = 1_000_000;
-	private final Map<Integer, List<Integer>> grafo; // grafo dirigido
+	private final Map<Integer, List<Integer>> grafo;
 
-	// ====================================================================================
-	// CONSTRUCTOR: recibe la matriz de tramos y arma el grafo
-	// ====================================================================================
 	public ContarCaminosDAG(int cantidadDeVertices, int tramos[][]) {
 		this.grafo = new HashMap<>();
 
-		// Inicializar listas vacías
 		for (int i = 1; i <= cantidadDeVertices; i++) {
 			grafo.put(i, new ArrayList<>());
 		}
 
-		// Cargar aristas del DAG
 		for (int tramo[] : tramos) {
 			int a = tramo[0];
 			int b = tramo[1];
@@ -124,7 +119,7 @@ public class ContarCaminosDAG {
 	}
 
 	// ====================================================================================
-	// FASE 4: RESOLVER DP INVERTIDA BOTTOM UP
+	// FASE 4: RESOLVER DP INVERTIDA - BOTTOM UP
 	// ====================================================================================
 	private long resolverDP(List<Integer> ordenTopologico, Map<Integer, Long> formasDeLlegarDP, int entrada) {
 
