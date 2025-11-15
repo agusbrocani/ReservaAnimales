@@ -11,6 +11,9 @@ public class MensajeError {
 	public static final String RUTA_NULA_O_VACIA = "La ruta del archivo no puede ser nula ni vacía.";
 	public static final String RUTA_INEXISTENTE = "La ruta indicada no existe en el sistema de archivos o no es accesible.";
 
+	// ContarCaminosDAG
+	public static final String GRAFO_CON_CICLOS = "El grafo contiene ciclos y no es un DAG.";
+	
 	private MensajeError() {
 		// Evita instanciación
 	}
